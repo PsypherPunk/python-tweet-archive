@@ -3,6 +3,12 @@ python-tweet-archive
 
 Archive tweets to WARC files.
 
-Only esoteric requirement is hanzo.warctools which can be install via Pip:
+Only esoteric requirements are hanzo.warctools and tweepy, both of which which 
+can be install via Pip:
 
     pip install hanzo-warctools
+    pip install tweepy
+
+For OAuth authentication, a new app. will have to be registered at 
+https://dev.twitter.com/ and the corresponding details updated in 
+settings.py.
