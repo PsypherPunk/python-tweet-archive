@@ -33,6 +33,9 @@ if args.users is not None:
 	users = args.users.split( "," )
 if args.terms is not None:
 	terms = args.terms.split( "," )
+if len( users + terms ) == 0:
+	parser.print_help()
+	sys.exit( 1 )
 
 class StreamListener( tweepy.StreamListener ):
 	def on_status( self, tweet ):
