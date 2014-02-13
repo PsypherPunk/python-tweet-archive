@@ -10,6 +10,7 @@ import argparse
 from settings import *
 from datetime import datetime
 from hanzo.warctools import WarcRecord
+from warcwriterpool import WarcWriterPool
 from hanzo.warctools.warc import warc_datetime_str
 
 auth = tweepy.OAuthHandler(  TWITTER_CONSUMER_KEY, TWITTER_CONSUMER_SECRET  )
@@ -24,20 +25,10 @@ parser.add_argument( "-u", "--users", type=str, help="Comma-separated list of us
 parser.add_argument( "-t", "--terms", type=str, help="Comma-separated list of terms to track." )
 args = parser.parse_args()
 
-warc = open( "BL-" + datetime.now().strftime("%Y%m%d%H%M%S") + ".warc.gz", "ab" )
-mime = "application/json"
-
-users = []
-terms = []
-if args.users is not None:
-	users = args.users.split( "," )
-if args.terms is not None:
-	terms = args.terms.split( "," )
-if len( users + terms ) == 0:
-	parser.print_help()
-	sys.exit( 1 )
-
 class StreamListener( tweepy.StreamListener ):
+	def __init__( self, writer ):
+		self.writer = writer
+
 	def on_status( self, tweet ):
 		logger.info( "Ran on_status" )
 
@@ -53,15 +44,30 @@ class StreamListener( tweepy.StreamListener ):
 			headers = [
 				( WarcRecord.TYPE, WarcRecord.RESOURCE ),
 				( WarcRecord.URL, url ),
-				( WarcRecord.CONTENT_TYPE, mime ),
+				( WarcRecord.CONTENT_TYPE, "application/json" ),
 				( WarcRecord.DATE, warc_datetime_str( datetime.now() ) ),
 				( WarcRecord.ID, "<urn:uuid:%s>" % uuid.uuid1() ),
 			]
-			record = WarcRecord( headers=headers, content=( mime, data ) ) 
-			record.write_to( warc, gzip=True )
-			warc.flush()
+			self.writer.write_record( headers, "application/json", data )
 		except KeyError:
 			logger.error( "KeyError: " + data )
 
-stream = tweepy.Stream( auth=auth, listener=StreamListener() )
-stream.filter( follow=users, track=terms )
+if __name__ == "__main__":
+	users = []
+	terms = []
+	if args.users is not None:
+		users = args.users.split( "," )
+	if args.terms is not None:
+		terms = args.terms.split( "," )
+	if len( users + terms ) == 0:
+		parser.print_help()
+		sys.exit( 1 )
+
+	w = WarcWriterPool( gzip=False )
+	try:
+		stream = tweepy.Stream( auth=auth, listener=StreamListener( writer=w ) )
+		stream.filter( follow=users, track=terms )
+	except KeyboardInterrupt as k:
+		w.cleanup()
+		sys.exit( 0 )
+
