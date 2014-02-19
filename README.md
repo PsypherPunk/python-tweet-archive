@@ -3,15 +3,19 @@ python-tweet-archive
 
 Archive tweets to WARC files.
 
-Only esoteric requirements are hanzo.warctools and tweepy, both of which which 
-can be install via [Pip](http://www.pip-installer.org/en/latest/):
+This relies on [python-warcwriterpool](https://github.com/PsypherPunk/python-warcwriterpool) which should be installed beforehand.
 
-    pip install hanzo-warctools
-    pip install tweepy
+To install simply clone the repo:
 
-For OAuth authentication, a new app. will have to be registered at 
-https://dev.twitter.com/ and the corresponding details updated in 
-settings.py.
+    git clone https://github.com/PsypherPunk/python-tweet-archive.git
+
+For OAuth authentication, a new app. will have to be registered at
+https://dev.twitter.com/ and the corresponding details updated in
+settings.py. After that, to install run:
+
+    pip install ./python-tweet-archive
+
+This should handle the dependencies.After that you can simply run it from a command line:
 
     usage: archiver.py [-h] [-u USERS] [-t TERMS]
 
@@ -23,3 +27,4 @@ settings.py.
                            Comma-separated list of users to follow.
       -t TERMS, --terms TERMS
                             Comma-separated list of terms to track.
+
