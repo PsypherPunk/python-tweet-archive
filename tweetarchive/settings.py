@@ -1,5 +1,5 @@
-TWITTER_CONSUMER_KEY="QQLmIMllFWxZKi0rdmPuSg"
-TWITTER_CONSUMER_SECRET="Q6yGMQWBAlxgai3B45G9C8Na9i5k3bQ8hZ9j7JorIs"
-TWITTER_ACCESS_TOKEN="16067043-PDJQCHs8JvjFbE0R98KBS8mOmgjboiDGecX8DzIwY"
-TWITTER_ACCESS_SECRET="PRb6uzccTe08mjOP565mCR3pZDxRxDyCSqCWfOhjg"
+TWITTER_CONSUMER_KEY="!!!Replace with values from dev.twitter.com!!!"
+TWITTER_CONSUMER_SECRET="!!!Replace with values from dev.twitter.com!!!"
+TWITTER_ACCESS_TOKEN="!!!Replace with values from dev.twitter.com!!!"
+TWITTER_ACCESS_SECRET="!!!Replace with values from dev.twitter.com!!!"
 
