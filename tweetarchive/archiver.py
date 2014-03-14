@@ -7,7 +7,7 @@ import tweepy
 from settings import *
 from datetime import datetime
 from hanzo.warctools import WarcRecord
-from hanzo.warctools.warc import warc_datetime_str
+from warcwriterpool import warc_datetime_str
 
 class StreamListener( tweepy.StreamListener ):
 	def __init__( self, writer ):
