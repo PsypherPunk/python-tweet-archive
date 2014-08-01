@@ -1,2 +1,3 @@
 v0.0.1, 2014-02-10 -- Initial package release.
 v1.0.0, 2014-02-19 -- Repackaged.
+v1.0.1, 2014-03-14 -- Optional media writing.
