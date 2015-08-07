@@ -3,11 +3,11 @@ python-tweet-archive
 
 Archive tweets to WARC files.
 
-This relies on [python-warcwriterpool](https://github.com/PsypherPunk/python-warcwriterpool) which should be installed beforehand.
+This relies on [python-warcwriterpool](https://github.com/ukwa/python-warcwriterpool) which should be installed beforehand.
 
 To install simply clone the repo:
 
-    git clone https://github.com/PsypherPunk/python-tweet-archive.git
+    git clone https://github.com/ukwa/python-tweet-archive.git
 
 For OAuth authentication, a new app. will have to be registered at
 https://dev.twitter.com/ and the corresponding details updated in
